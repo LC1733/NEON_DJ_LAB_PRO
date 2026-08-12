@@ -18,10 +18,11 @@ main{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:ce
   const status=document.getElementById('status');
   try{
     if(typeof DecompressionStream==='undefined') throw new Error('Este navegador no soporta DecompressionStream. Usa una versión reciente de Chrome, Edge, Firefox o Safari.');
-    const parts=['00','01','02','03','04'];
+    const parts=['00a','00b','01','02','03','04'];
     const texts=[];
-    for(const n of parts){
-      status.textContent=`Cargando módulo ${Number(n)+1} de ${parts.length}…`;
+    for(let i=0;i<parts.length;i++){
+      const n=parts[i];
+      status.textContent=`Cargando módulo ${i+1} de ${parts.length}…`;
       const r=await fetch(`.payload/payload-${n}.txt`,{cache:'no-store'});
       if(!r.ok) throw new Error(`No se pudo cargar payload-${n} (${r.status})`);
       texts.push(await r.text());
