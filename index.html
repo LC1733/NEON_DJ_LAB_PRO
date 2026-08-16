@@ -3,45 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#05060b">
-<title>NEON DJ LAB PRO</title>
+<meta name="theme-color" content="#06080b">
+<title>DJ CONSOLE PRO</title>
 <style>
-html,body{margin:0;min-height:100%;background:#0d0e10;color:#c8c6c0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+html,body{margin:0;min-height:100%;background:#06080b;color:#dfe5ec;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 main{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;box-sizing:border-box}
-.wrap{max-width:520px}.mark{width:64px;height:64px;margin:0 auto 18px;display:grid;place-items:center;border:1px solid #454b53;border-radius:6px;background:#22262b;font-weight:800;letter-spacing:.08em}h1{font-size:18px;letter-spacing:.18em;margin:0 0 10px}p{color:#868a92;line-height:1.6}.error{color:#e2593f}
+.wrap{max-width:520px}.mark{width:64px;height:64px;margin:0 auto 18px;display:grid;place-items:center;border:1px solid #2a323e;border-radius:6px;background:#0e1219;font-weight:800;letter-spacing:.08em}h1{font-size:18px;letter-spacing:.18em;margin:0 0 10px}p{color:#7d8794;line-height:1.6}.error{color:#ff5b5b}
 </style>
 </head>
 <body>
-<main id="loader"><div class="wrap"><div class="mark">ND</div><h1>NEON DJ LAB PRO</h1><p id="status">Cargando motor de performance…</p></div></main>
+<main id="loader"><div class="wrap"><div class="mark">DJ</div><h1>DJ CONSOLE PRO</h1><p id="status">Cargando consola…</p></div></main>
 <script>
 (async()=>{
   const status=document.getElementById('status');
   try{
-    if(typeof DecompressionStream==='undefined') throw new Error('Este navegador no soporta DecompressionStream. Usa una versión reciente de Chrome, Edge, Firefox o Safari.');
-    const parts=['00a','00b','01','02','03','04'];
+    const parts=['00','01','02','03','04'];
     const texts=[];
     for(let i=0;i<parts.length;i++){
       const n=parts[i];
       status.textContent=`Cargando módulo ${i+1} de ${parts.length}…`;
-      const r=await fetch(`.payload/payload-${n}.txt`,{cache:'no-store'});
-      if(!r.ok) throw new Error(`No se pudo cargar payload-${n} (${r.status})`);
+      const r=await fetch(`.payload/dj-html-${n}.txt`,{cache:'no-store'});
+      if(!r.ok) throw new Error(`No se pudo cargar dj-html-${n} (${r.status})`);
       texts.push(await r.text());
     }
-    const b64=texts.join('').replace(/\s+/g,'');
-    const bin=atob(b64);
-    const bytes=new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    const html=texts.join('');
+    if(!html.includes('<title>DJ CONSOLE PRO</title>')) throw new Error('El paquete de la aplicación no superó la verificación de contenido.');
     status.textContent='Iniciando consola…';
-    const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-    const html=await new Response(stream).text();
-    if(!html.includes('<title>NEON DJ LAB PRO')) throw new Error('El paquete de la aplicación no superó la verificación de contenido.');
     document.open();
     document.write(html);
     document.close();
   }catch(err){
     console.error(err);
     status.className='error';
-    status.textContent='Error al iniciar NEON DJ LAB PRO: '+err.message;
+    status.textContent='Error al iniciar DJ CONSOLE PRO: '+err.message;
   }
 })();
 </script>
