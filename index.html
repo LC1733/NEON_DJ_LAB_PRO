@@ -3,38 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#06080b">
 <title>DJ CONSOLE PRO</title>
 <style>
-html,body{margin:0;min-height:100%;background:#06080b;color:#dfe5ec;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{min-height:100dvh;display:grid;place-items:center;padding:24px;text-align:center;box-sizing:border-box}.wrap{max-width:520px}.mark{width:64px;height:64px;margin:0 auto 18px;display:grid;place-items:center;border:1px solid #2a323e;border-radius:8px;background:#0e1219;font-weight:900;letter-spacing:.08em}h1{font-size:18px;letter-spacing:.18em;margin:0 0 10px}p{color:#7d8794;line-height:1.6}.error{color:#ff5b5b}
+html,body{margin:0;min-height:100%;background:#06080b;color:#dfe5ec;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;box-sizing:border-box}
+.wrap{max-width:520px}.mark{width:64px;height:64px;margin:0 auto 18px;display:grid;place-items:center;border:1px solid #2a323e;border-radius:6px;background:#0e1219;font-weight:800;letter-spacing:.08em}h1{font-size:18px;letter-spacing:.18em;margin:0 0 10px}p{color:#7d8794;line-height:1.6}.error{color:#ff5b5b}
 </style>
-<script>
-(function(){
-  var phone = window.innerWidth <= 900 || navigator.maxTouchPoints > 0 || (window.matchMedia && matchMedia('(pointer: coarse)').matches);
-  if(phone && !location.pathname.endsWith('/mobile.html')) location.replace('./mobile.html?v=20260815-4');
-})();
-</script>
 </head>
 <body>
 <main id="loader"><div class="wrap"><div class="mark">DJ</div><h1>DJ CONSOLE PRO</h1><p id="status">Cargando consola…</p></div></main>
 <script>
 (async()=>{
- const status=document.getElementById('status');
- try{
-  const parts=['00','01','02','03','04'],texts=[];
-  for(let i=0;i<parts.length;i++){
-   status.textContent=`Cargando módulo ${i+1} de ${parts.length}…`;
-   const r=await fetch(`payload/dj-html-${parts[i]}.txt?v=desktop-20260815-4`,{cache:'no-store'});
-   if(!r.ok) throw new Error(`No se pudo cargar dj-html-${parts[i]} (${r.status})`);
-   texts.push(await r.text());
+  const status=document.getElementById('status');
+  try{
+    const parts=['00','01','02','03','04'];
+    const texts=[];
+    for(let i=0;i<parts.length;i++){
+      const n=parts[i];
+      status.textContent=`Cargando módulo ${i+1} de ${parts.length}…`;
+      const r=await fetch(`payload/dj-html-${n}.txt?v=original-20260815-5`,{cache:'no-store'});
+      if(!r.ok) throw new Error(`No se pudo cargar dj-html-${n} (${r.status})`);
+      texts.push(await r.text());
+    }
+    let html=texts.join('');
+    if(!html.includes('<title>DJ CONSOLE PRO</title>')) throw new Error('Contenido inválido');
+
+    const phone = window.innerWidth <= 1024 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if(phone){
+      html=html.replace(/<meta name="viewport"[^>]*>/i,'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">');
+      const fitScript=`<script>(function(){var m=document.querySelector('meta[name="viewport"]');if(!m)return;var designWidth=1280;var deviceWidth=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);var scale=Math.min(1,deviceWidth/designWidth);m.setAttribute('content','width='+designWidth+',initial-scale='+scale+',minimum-scale='+scale+',maximum-scale=3,user-scalable=yes,viewport-fit=cover');})();<\/script>`;
+      html=html.replace('</head>',fitScript+'</head>');
+    }
+
+    status.textContent='Iniciando consola…';
+    document.open();
+    document.write(html);
+    document.close();
+  }catch(err){
+    console.error(err);
+    status.className='error';
+    status.textContent='Error al iniciar DJ CONSOLE PRO: '+err.message;
   }
-  const html=texts.join('');
-  if(!html.includes('<title>DJ CONSOLE PRO</title>')) throw new Error('Contenido inválido');
-  document.open();document.write(html);document.close();
- }catch(err){console.error(err);status.className='error';status.textContent='Error al iniciar DJ CONSOLE PRO: '+err.message}
 })();
 </script>
 </body>
