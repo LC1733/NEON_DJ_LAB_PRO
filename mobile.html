@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06080b">
+<title>DJ CONSOLE PRO · MOBILE</title>
+<style>
+html,body{margin:0;min-height:100%;background:#06080b;color:#dfe5ec;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+#boot{min-height:100dvh;display:grid;place-items:center;padding:24px;text-align:center;box-sizing:border-box}.box{max-width:430px}.logo{width:64px;height:64px;margin:0 auto 18px;display:grid;place-items:center;border:1px solid #2a323e;border-radius:8px;background:#0e1219;font-weight:900;letter-spacing:.1em}h1{font-size:17px;letter-spacing:.16em;margin:0 0 10px}p{color:#7d8794;line-height:1.55}.err{color:#ff5b5b}
+</style>
+</head>
+<body>
+<div id="boot"><div class="box"><div class="logo">DJ</div><h1>DJ CONSOLE PRO</h1><p id="status">Cargando modo teléfono…</p></div></div>
+<script>
+(async()=>{
+ const status=document.getElementById('status');
+ try{
+  const parts=['00','01','02','03','04'];
+  const chunks=[];
+  for(let i=0;i<parts.length;i++){
+   status.textContent=`Cargando ${i+1}/${parts.length}…`;
+   const r=await fetch(`payload/dj-html-${parts[i]}.txt?v=mobile-20260815-3`,{cache:'no-store'});
+   if(!r.ok) throw new Error(`módulo ${parts[i]}: ${r.status}`);
+   chunks.push(await r.text());
+  }
+  let html=chunks.join('');
+  html=html.replace(/<meta name="viewport"[^>]*>/i,'<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">');
+  const css=`<style id="phone-force">
+html,body{width:100%!important;height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;-webkit-text-size-adjust:100%!important}
+body{margin:0!important;padding:0 0 env(safe-area-inset-bottom)!important;font-size:12px!important}
+*{max-width:100%;box-sizing:border-box}
+button,input,select{font-size:16px!important}
+.shell{display:block!important;width:100%!important;height:auto!important;min-height:100dvh!important;overflow:visible!important}
+.browser{display:flex!important;width:100%!important;height:auto!important;min-height:0!important;max-height:220px!important;border-right:0!important;border-bottom:1px solid var(--line)!important}
+.bh{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:6px!important;padding:7px!important}
+.bh h2{display:none!important}.srch{width:100%!important;height:42px!important;min-width:0!important}.imp{width:100%!important;min-height:42px!important}
+.tlist{flex:none!important;max-height:118px!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important}.trk{padding:7px 8px!important}.ldrow button{min-height:36px!important}
+.main{display:block!important;width:100%!important;min-width:0!important;min-height:0!important;overflow:visible!important}
+.top{position:sticky!important;top:0!important;z-index:40!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;height:auto!important;min-height:0!important;gap:5px!important;padding:6px!important;padding-top:max(6px,env(safe-area-inset-top))!important;background:#0c1017!important}
+.top h1{grid-column:1/-1!important;width:100%!important;text-align:center!important;font-size:.65rem!important;line-height:1.25!important;padding:2px 0!important}.top .spacer{display:none!important}.top .chip{max-width:none!important;min-width:0!important;justify-content:center!important;padding:6px 4px!important;font-size:.56rem!important}.top .tb{min-height:38px!important;padding:6px 4px!important;font-size:.58rem!important}
+.stack{width:100%!important;padding:5px!important;background:#070a0e!important}.wrow{margin-bottom:4px!important}.wmeta{left:26px!important;right:4px!important;justify-content:flex-end!important;overflow:hidden!important;white-space:nowrap!important;font-size:.54rem!important}canvas.zoom{display:block!important;width:100%!important;height:58px!important}canvas.ov{display:block!important;width:100%!important;height:18px!important}
+.console{display:flex!important;flex-direction:column!important;width:100%!important;min-width:0!important;gap:6px!important;padding:6px!important;overflow:visible!important;background:var(--bg)!important}
+.deck,.mixer{display:flex!important;width:100%!important;min-width:0!important;max-width:none!important;padding:7px!important;gap:6px!important}.deck.A{order:1!important}.mixer{order:2!important}.deck.B{order:3!important}
+.dhead{min-width:0!important}.dtitle{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}.dsub{gap:6px!important;font-size:.58rem!important}
+.transport,.pads{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important}.loops{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:4px!important}.tbtn{min-width:0!important;padding:10px 2px!important;font-size:.56rem!important;letter-spacing:.02em!important}.pad{min-width:0!important;padding:10px 1px!important;font-size:.55rem!important}
+.fxgrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:4px!important}.fxrow{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important}.fx{min-width:0!important;padding:8px 1px!important;font-size:.50rem!important;letter-spacing:0!important}.fxknobs,.knobs,.knobs.two{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+.jogzone{display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;gap:7px!important;align-items:center!important}canvas.jog{display:block!important;width:96px!important;height:96px!important;max-width:96px!important}.jogside{min-width:0!important}.bigbpm{font-size:1.08rem!important}.tempowrap{grid-template-columns:minmax(0,1fr) auto!important;gap:5px!important}.k{min-width:0!important;padding:6px!important}
+.vu,.mrow{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}.xf,.masterk,.match{padding:7px!important}canvas#spec{width:100%!important;height:48px!important}.hint{font-size:.50rem!important}
+.veil{padding:16px!important}.veil h2{font-size:1.15rem!important}.veil p{font-size:.72rem!important}.veil button{width:100%!important;max-width:320px!important;min-height:48px!important}.kbd{display:none!important}
+.toast{left:8px!important;right:8px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important}
+@media(max-width:360px){.jogzone{grid-template-columns:82px minmax(0,1fr)!important}canvas.jog{width:82px!important;height:82px!important;max-width:82px!important}.fxgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.knobs,.knobs.two{grid-template-columns:1fr 1fr!important}}
+</style>`;
+  html=html.replace('</head>',css+'</head>');
+  status.textContent='Iniciando…';
+  document.open();document.write(html);document.close();
+ }catch(e){console.error(e);status.className='err';status.textContent='Error al abrir la consola: '+e.message}
+})();
+</script>
+</body>
+</html>
