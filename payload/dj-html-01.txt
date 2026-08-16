@@ -1,0 +1,256 @@
+ck="A"></canvas>
+        <canvas class="ov" id="oA" data-deck="A"></canvas>
+      </div>
+      <div class="wrow">
+        <div class="wtag b">B</div>
+        <div class="wmeta"><span id="wmB">—</span><span class="cd" id="wcB"></span></div>
+        <canvas class="zoom" id="zB" data-deck="B"></canvas>
+        <canvas class="ov" id="oB" data-deck="B"></canvas>
+      </div>
+    </div>
+
+    <div class="console">
+      <section class="deck A" id="deckA">
+        <div class="dhead"><span class="dname">DECK A</span><span class="dsub"><span id="tmA">—</span></span></div>
+        <div class="dtitle" id="tiA">Sin pista</div>
+        <div class="dsub"><span>BPM <b id="bpA">—</b></span><span>KEY <i id="kyA">—</i></span><span id="duA">—</span></div>
+
+        <div class="jogzone">
+          <canvas class="jog" id="jogA" data-deck="A"></canvas>
+          <div class="jogside">
+            <div class="bigbpm" id="liveA">—<small>BPM LIVE</small></div>
+            <div class="k">
+              <label>Tempo <button class="rst" data-rst="tempo" data-deck="A">RESET</button></label>
+              <input type="range" data-deck="A" data-p="tempo" min="-16" max="16" step="0.05" value="0">
+              <output id="oTempoA">+0.00 %</output>
+            </div>
+          </div>
+        </div>
+
+        <div class="transport">
+          <button class="tbtn" data-act="play" data-deck="A">PLAY</button>
+          <button class="tbtn" data-act="cue" data-deck="A">CUE</button>
+          <button class="tbtn" data-act="sync" data-deck="A">SYNC</button>
+          <button class="tbtn" data-act="master" data-deck="A">MASTER</button>
+        </div>
+
+        <div class="pads">
+          <button class="pad" data-hc="0" data-deck="A">HC 1</button>
+          <button class="pad" data-hc="1" data-deck="A">HC 2</button>
+          <button class="pad" data-hc="2" data-deck="A">HC 3</button>
+          <button class="pad" data-hc="3" data-deck="A">HC 4</button>
+        </div>
+        <div class="loops">
+          <button class="lp" data-loop="1" data-deck="A">1</button>
+          <button class="lp" data-loop="2" data-deck="A">2</button>
+          <button class="lp" data-loop="4" data-deck="A">4</button>
+          <button class="lp" data-loop="8" data-deck="A">8</button>
+          <button class="lp" data-loop="16" data-deck="A">16</button>
+        </div>
+
+        <div class="fxbox">
+          <div class="hd"><span>FX</span><span id="fxNameA">DRY</span></div>
+          <div class="fxgrid">
+            <button class="fx" data-fx="echo" data-deck="A">ECHO</button>
+            <button class="fx" data-fx="pingpong" data-deck="A">PING PONG</button>
+            <button class="fx" data-fx="reverb" data-deck="A">REVERB</button>
+            <button class="fx" data-fx="flanger" data-deck="A">FLANGER</button>
+            <button class="fx" data-fx="phaser" data-deck="A">PHASER</button>
+            <button class="fx" data-fx="spiral" data-deck="A">SPIRAL</button>
+            <button class="fx" data-fx="tremolo" data-deck="A">TREMOLO</button>
+            <button class="fx" data-fx="autopan" data-deck="A">AUTO PAN</button>
+            <button class="fx" data-fx="wobble" data-deck="A">WOBBLE</button>
+            <button class="fx" data-fx="crush" data-deck="A">BIT CRUSH</button>
+            <button class="fx" data-fx="drive" data-deck="A">DRIVE</button>
+            <button class="fx" data-fx="ringmod" data-deck="A">RING MOD</button>
+          </div>
+          <div class="fxrow">
+            <button class="fx tr" data-roll="0.5" data-deck="A">ROLL 1/2</button>
+            <button class="fx tr" data-roll="0.25" data-deck="A">1/4</button>
+            <button class="fx tr" data-roll="0.125" data-deck="A">1/8</button>
+            <button class="fx tr" data-brake="1" data-deck="A">BRAKE</button>
+          </div>
+          <div class="fxknobs">
+            <div class="k"><label>Wet</label><input type="range" data-deck="A" data-p="wet" min="0" max="100" step="1" value="45"><output>45 %</output></div>
+            <div class="k"><label>Beats</label><input type="range" data-deck="A" data-p="fxbeat" min="0" max="5" step="1" value="2"><output>1/2</output></div>
+          </div>
+        </div>
+
+        <div class="knobs">
+          <div class="k"><label>Low</label><input type="range" data-deck="A" data-p="low" min="-26" max="10" step="1" value="0"><output>0 dB</output></div>
+          <div class="k"><label>Mid</label><input type="range" data-deck="A" data-p="mid" min="-26" max="10" step="1" value="0"><output>0 dB</output></div>
+          <div class="k"><label>High</label><input type="range" data-deck="A" data-p="high" min="-26" max="10" step="1" value="0"><output>0 dB</output></div>
+        </div>
+        <div class="knobs two">
+          <div class="k"><label>Filtro <button class="rst" data-rst="filter" data-deck="A">RESET</button></label><input type="range" data-deck="A" data-p="filter" min="-100" max="100" step="1" value="0"><output>OFF</output></div>
+          <div class="k"><label>Trim</label><input type="range" data-deck="A" data-p="gain" min="0" max="120" step="1" value="85"><output>85 %</output></div>
+        </div>
+
+        <div class="vu">
+          <div class="vcell"><span>RMS</span><div class="vbar"><div class="vfill" id="rbA"></div></div><div class="vnum" id="rvA">-inf dB</div></div>
+          <div class="vcell"><span>PEAK</span><div class="vbar"><div class="vfill" id="pbA"></div></div><div class="vnum" id="pvA">-inf dB</div></div>
+        </div>
+      </section>
+
+      <section class="mixer">
+        <div class="mx-title">MIXER</div>
+
+        <div class="match">
+          <div class="lbl">COMPATIBILIDAD A / B</div>
+          <div class="val" id="mVal">—</div>
+          <div class="sub" id="mSub">Carga dos pistas</div>
+        </div>
+
+        <div class="xf">
+          <div class="row"><span>A</span><span id="xfLbl">CENTER</span><span>B</span></div>
+          <input type="range" id="xf" min="-100" max="100" value="0">
+        </div>
+
+        <div class="mrow">
+          <button class="mbtn" id="autoMix">AUTO FADE 8s</button>
+          <button class="mbtn" id="panic">STOP ALL</button>
+        </div>
+
+        <div class="masterk">
+          <label>MASTER</label>
+          <input type="range" id="mst" min="0" max="100" value="82">
+          <output id="mstOut">82 %</output>
+        </div>
+
+        <canvas id="spec"></canvas>
+
+        <div class="vcell"><span>MASTER PEAK</span><div class="vbar"><div class="vfill" id="mPk"></div></div><div class="vnum" id="mPkV">-inf dB</div></div>
+
+        <div class="hint">Espacio = play A · Shift+Espacio = play B<br>1-4 hot cues A · Q-R hot cues B<br>flechas = crossfader · S = sync B<br>Z/X roll 1/4 · C/V brake</div>
+      </section>
+
+      <section class="deck B" id="deckB">
+        <div class="dhead"><span class="dname">DECK B</span><span class="dsub"><span id="tmB">—</span></span></div>
+        <div class="dtitle" id="tiB">Sin pista</div>
+        <div class="dsub"><span>BPM <b id="bpB">—</b></span><span>KEY <i id="kyB">—</i></span><span id="duB">—</span></div>
+
+        <div class="jogzone">
+          <canvas class="jog" id="jogB" data-deck="B"></canvas>
+          <div class="jogside">
+            <div class="bigbpm" id="liveB">—<small>BPM LIVE</small></div>
+            <div class="k">
+              <label>Tempo <button class="rst" data-rst="tempo" data-deck="B">RESET</button></label>
+              <input type="range" data-deck="B" data-p="tempo" min="-16" max="16" step="0.05" value="0">
+              <output id="oTempoB">+0.00 %</output>
+            </div>
+          </div>
+        </div>
+
+        <div class="transport">
+          <button class="tbtn" data-act="play" data-deck="B">PLAY</button>
+          <button class="tbtn" data-act="cue" data-deck="B">CUE</button>
+          <button class="tbtn" data-act="sync" data-deck="B">SYNC</button>
+          <button class="tbtn" data-act="master" data-deck="B">MASTER</button>
+        </div>
+
+        <div class="pads">
+          <button class="pad" data-hc="0" data-deck="B">HC 1</button>
+          <button class="pad" data-hc="1" data-deck="B">HC 2</button>
+          <button class="pad" data-hc="2" data-deck="B">HC 3</button>
+          <button class="pad" data-hc="3" data-deck="B">HC 4</button>
+        </div>
+        <div class="loops">
+          <button class="lp" data-loop="1" data-deck="B">1</button>
+          <button class="lp" data-loop="2" data-deck="B">2</button>
+          <button class="lp" data-loop="4" data-deck="B">4</button>
+          <button class="lp" data-loop="8" data-deck="B">8</button>
+          <button class="lp" data-loop="16" data-deck="B">16</button>
+        </div>
+
+        <div class="fxbox">
+          <div class="hd"><span>FX</span><span id="fxNameB">DRY</span></div>
+          <div class="fxgrid">
+            <button class="fx" data-fx="echo" data-deck="B">ECHO</button>
+            <button class="fx" data-fx="pingpong" data-deck="B">PING PONG</button>
+            <button class="fx" data-fx="reverb" data-deck="B">REVERB</button>
+            <button class="fx" data-fx="flanger" data-deck="B">FLANGER</button>
+            <button class="fx" data-fx="phaser" data-deck="B">PHASER</button>
+            <button class="fx" data-fx="spiral" data-deck="B">SPIRAL</button>
+            <button class="fx" data-fx="tremolo" data-deck="B">TREMOLO</button>
+            <button class="fx" data-fx="autopan" data-deck="B">AUTO PAN</button>
+            <button class="fx" data-fx="wobble" data-deck="B">WOBBLE</button>
+            <button class="fx" data-fx="crush" data-deck="B">BIT CRUSH</button>
+            <button class="fx" data-fx="drive" data-deck="B">DRIVE</button>
+            <button class="fx" data-fx="ringmod" data-deck="B">RING MOD</button>
+          </div>
+          <div class="fxrow">
+            <button class="fx tr" data-roll="0.5" data-deck="B">ROLL 1/2</button>
+            <button class="fx tr" data-roll="0.25" data-deck="B">1/4</button>
+            <button class="fx tr" data-roll="0.125" data-deck="B">1/8</button>
+            <button class="fx tr" data-brake="1" data-deck="B">BRAKE</button>
+          </div>
+          <div class="fxknobs">
+            <div class="k"><label>Wet</label><input type="range" data-deck="B" data-p="wet" min="0" max="100" step="1" value="45"><output>45 %</output></div>
+            <div class="k"><label>Beats</label><input type="range" data-deck="B" data-p="fxbeat" min="0" max="5" step="1" value="2"><output>1/2</output></div>
+          </div>
+        </div>
+
+        <div class="knobs">
+          <div class="k"><label>Low</label><input type="range" data-deck="B" data-p="low" min="-26" max="10" step="1" value="0"><output>0 dB</output></div>
+          <div class="k"><label>Mid</label><input type="range" data-deck="B" data-p="mid" min="-26" max="10" step="1" value="0"><output>0 dB</output></div>
+          <div class="k"><label>High</label><input type="range" data-deck="B" data-p="high" min="-26" max="10" step="1" value="0"><output>0 dB</output></div>
+        </div>
+        <div class="knobs two">
+          <div class="k"><label>Filtro <button class="rst" data-rst="filter" data-deck="B">RESET</button></label><input type="range" data-deck="B" data-p="filter" min="-100" max="100" step="1" value="0"><output>OFF</output></div>
+          <div class="k"><label>Trim</label><input type="range" data-deck="B" data-p="gain" min="0" max="120" step="1" value="85"><output>85 %</output></div>
+        </div>
+
+        <div class="vu">
+          <div class="vcell"><span>RMS</span><div class="vbar"><div class="vfill" id="rbB"></div></div><div class="vnum" id="rvB">-inf dB</div></div>
+          <div class="vcell"><span>PEAK</span><div class="vbar"><div class="vfill" id="pbB"></div></div><div class="vnum" id="pvB">-inf dB</div></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="veil" id="veil">
+  <div>
+    <h2>DJ CONSOLE PRO</h2>
+    <p>Dos decks con motor Web Audio real: analisis de BPM y tonalidad al cargar, beatgrid sobre la onda, EQ de 3 bandas por canal con kill, filtro LP/HP, hot cues, loops por compases, crossfader de potencia constante y grabacion del master.</p>
+    <button id="boot">INICIAR MOTOR DE AUDIO</button>
+    <div class="kbd">
+      <b>Espacio</b> play A · <b>Shift+Espacio</b> play B<br>
+      <b>1 2 3 4</b> hot cues A · <b>Q W E R</b> hot cues B<br>
+      <b>flechas</b> crossfader · <b>S</b> sync B a A
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+(function(){
+
+var $ = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
+function fmt(s){ if(!isFinite(s)||s<0) s=0; var m=Math.floor(s/60), x=Math.floor(s%60); return m+":"+String(x).padStart(2,"0"); }
+function db(v){ return v<=1e-7 ? "-inf" : (20*Math.log10(v)).toFixed(1); }
+
+var ac=null, master=null, masterAn=null, recDest=null, rec=null, recChunks=[], recBlob=null, booted=false;
+var library=[];
+
+var D = {
+  A:{ id:"A", track:null, src:null, playing:false, tempo:1, rate:1, bend:0, startedAt:0, offset:0, cue:0,
+      hot:[null,null,null,null], loop:null, nodes:null, an:null, scrub:false, jogA:0, fx:null, wet:0.45, fxBeat:0.5, roll:null, braking:false },
+  B:{ id:"B", track:null, src:null, playing:false, tempo:1, rate:1, bend:0, startedAt:0, offset:0, cue:0,
+      hot:[null,null,null,null], loop:null, nodes:null, an:null, scrub:false, jogA:0, fx:null, wet:0.45, fxBeat:0.5, roll:null, braking:false }
+};
+
+var toastTimer=null;
+function toast(msg, err){
+  var old=$(".toast"); if(old) old.remove();
+  var t=document.createElement("div"); t.className="toast"+(err?" err":""); t.textContent=msg;
+  document.body.appendChild(t); clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){ t.remove(); }, 2600);
+}
+
+function buildChannel(){
+  var trim = ac.createGain();
+  var low  = ac.createBiquadFilter(); low.type="lowshelf";  low.frequency.value=200;
+  var mid  = ac.createBiquadFilter(); mid.ty
